@@ -4,7 +4,8 @@ Arquivos:
 - index.html
 - style.css
 - script.js
-- assets/logo.png
+- assets/
+logo.png
 
 Esta é uma versão estática, feita para ser publicada gratuitamente em serviços como GitHub Pages.
 O formulário e o portfólio são demonstrativos nesta primeira versão.
