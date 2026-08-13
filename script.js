@@ -11,6 +11,33 @@ filters.forEach(btn=>btn.addEventListener('click',()=>{
 
 document.getElementById('quoteForm')?.addEventListener('submit',e=>{
   e.preventDefault();
+
+  const form=e.currentTarget;
   const id='PED-'+String(Date.now()).slice(-4);
-  alert(`Pedido enviado com sucesso! 🚀\n\nNúmero do pedido: ${id}\n\nNesta primeira versão, o formulário é apenas demonstrativo. Depois podemos conectar ao WhatsApp, e-mail ou banco de dados.`);
+  const dados=new FormData(form);
+
+  let mensagem=`━━━━━━━━━━━━━━━━
+📋 PEDIDO #${id.replace('PED-','')}
+━━━━━━━━━━━━━━━━
+
+`;
+
+  for(const [chave,valor] of dados.entries()){
+    if(valor instanceof File){
+      if(valor.name) mensagem+=`📎 ARQUIVO: ${valor.name}\n`;
+    }else if(valor){
+      mensagem+=`${chave.toUpperCase()}: ${valor}\n`;
+    }
+  }
+
+  mensagem+=`
+📌 STATUS:
+🔵 Novo
+
+━━━━━━━━━━━━━━━━`;
+
+  const whatsapp='5535999927517';
+  const url=`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(url,'_blank');
 });
