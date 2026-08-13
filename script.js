@@ -15,12 +15,12 @@ document.getElementById('quoteForm')?.addEventListener('submit',e=>{
   const form=e.currentTarget;
   const id='PED-'+String(Date.now()).slice(-4);
 
-  const nome=form.elements.nome.value;
-  const whatsapp=form.elements.whatsapp.value;
-  const email=form.elements.email.value;
-  const servico=form.elements.servico.value;
-  const prazo=form.elements.prazo.value;
-  const descricao=form.elements.descricao.value;
+  const nome=form.querySelector('[name="nome"]').value;
+const whatsapp=form.querySelector('[name="whatsapp"]').value;
+const email=form.querySelector('[name="email"]').value;
+const servico=form.querySelector('[name="servico"]').value;
+const prazo=form.querySelector('[name="prazo"]').value || 'Não informado';
+const descricao=form.querySelector('[name="descricao"]').value;
 
   const mensagem=`━━━━━━━━━━━━━━━━
 📋 PEDIDO #${id.replace('PED-','')}
@@ -39,7 +39,7 @@ ${email}
 ${servico}
 
 📅 PRAZO:
-${prazo || 'Não informado'}
+${prazo}
 
 📝 DESCRIÇÃO:
 ${descricao}
@@ -55,8 +55,8 @@ Pendente
 
 ━━━━━━━━━━━━━━━━`;
 
-  const numero='5535999927517';
+  const numero='553599927517';
   const url=`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
-  window.open(url,'_blank');
+  window.location.href=url;
 });
