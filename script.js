@@ -14,30 +14,49 @@ document.getElementById('quoteForm')?.addEventListener('submit',e=>{
 
   const form=e.currentTarget;
   const id='PED-'+String(Date.now()).slice(-4);
-  const dados=new FormData(form);
 
-  let mensagem=`━━━━━━━━━━━━━━━━
+  const nome=form.elements.nome.value;
+  const whatsapp=form.elements.whatsapp.value;
+  const email=form.elements.email.value;
+  const servico=form.elements.servico.value;
+  const prazo=form.elements.prazo.value;
+  const descricao=form.elements.descricao.value;
+
+  const mensagem=`━━━━━━━━━━━━━━━━
 📋 PEDIDO #${id.replace('PED-','')}
 ━━━━━━━━━━━━━━━━
 
-`;
+👤 CLIENTE:
+${nome}
 
-  for(const [chave,valor] of dados.entries()){
-    if(valor instanceof File){
-      if(valor.name) mensagem+=`📎 ARQUIVO: ${valor.name}\n`;
-    }else if(valor){
-      mensagem+=`${chave.toUpperCase()}: ${valor}\n`;
-    }
-  }
+📱 WHATSAPP:
+${whatsapp}
 
-  mensagem+=`
+📧 E-MAIL:
+${email}
+
+🎨 SERVIÇO:
+${servico}
+
+📅 PRAZO:
+${prazo || 'Não informado'}
+
+📝 DESCRIÇÃO:
+${descricao}
+
+💰 VALOR:
+A definir
+
+💳 PAGAMENTO:
+Pendente
+
 📌 STATUS:
 🔵 Novo
 
 ━━━━━━━━━━━━━━━━`;
 
-  const whatsapp='5535999927517';
-  const url=`https://wa.me/${whatsapp}?text=${encodeURIComponent(mensagem)}`;
+  const numero='5535999927517';
+  const url=`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
   window.open(url,'_blank');
 });
